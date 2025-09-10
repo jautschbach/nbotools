@@ -43,6 +43,13 @@ The script provides the following functionality via an interactive menu:
 
 A standalone script `nao2pnao.py` is provided if one wishes to visualize the reconstructed PNAOs.
 
+*Note:* Some of the NBOTools features assume you're using a Gaussian-type
+orbital (GTO)
+basis. Features such as orbital transformations, localization, and others,
+where no explicit information re. basis set exponents or contraction is
+neededi, should work also for Slater-type orbital (STO) basis sets, such as 
+with `.47` files coming from 
+calculations with the Amsterdam Density Functional code (https://www.scm.com).
 
 ### Additional Features
 
@@ -94,7 +101,7 @@ NBOTools supports data sets containing separate alpha/beta spin data (e.g., from
    - Enter a number (0–8) to select an option.
    - Follow additional prompts for specific calculations or analyses.
 
-4. If you want to test the `.47` file basis set conventions, use the `parse-namelist` code under `tools`. There are several `.47` files provided under directory `tools/file47-examples`. `cd` to this directory and convert the `.47` data to a Fortran namelist input by running  
+4. If you want to test the `.47` file basis set conventions, use the `parse-namelist` code under `tools`. This is for GTO basis sets only. There are several `.47` files provided under directory `tools/file47-examples`. `cd` to this directory and convert the `.47` data to a Fortran namelist input by running  
 `python3 ../convert-47-to-namelists.py <file.47>`  
 which will create a file `file.namelists`. Assuming that the Fortran code in `../parse-namelists` has been compiled (e.g., with `gfortran`, type `make`), you can now run it with the `.namelists` file like this:  
 `../parse-namelists/parse-namelists < file.namelists`  
