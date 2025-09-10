@@ -101,11 +101,11 @@ NBOTools supports data sets containing separate alpha/beta spin data (e.g., from
    - Enter a number (0–8) to select an option.
    - Follow additional prompts for specific calculations or analyses.
 
-4. If you want to test the `.47` file basis set conventions, use the `parse-namelist` code under `tools`. This is for GTO basis sets only. There are several `.47` files provided under directory `tools/file47-examples`. `cd` to this directory and convert the `.47` data to a Fortran namelist input by running  
+4. If you want to test the `.47` file basis set conventions, use the `parse-namelist` code under `tools`. This is for GTO basis sets only. There are several `.47` files provided under directory `tools/file47-examples`. Change to this directory and convert the `.47` data to a Fortran namelist input by running  
 `python3 ../convert-47-to-namelists.py <file.47>`  
-which will create a file `file.namelists`. Assuming that the Fortran code in `../parse-namelists` has been compiled (e.g., with `gfortran`, type `make`), you can now run it with the `.namelists` file like this:  
+which will create a file `file.namelists`. Assuming that the Fortran code in `../parse-namelists` has been compiled (e.g., with `gfortran`; type `make`), you can now run it with the `.namelists` file like this:  
 `../parse-namelists/parse-namelists < file.namelists`  
-The program will output information about the basis set and other data that were present in the `.47` file and attempt to calculate the overlap matrix and compare it to the original overlap matrix from the `.47` file. If those are not the saame within tight numerical thresholds, you will likely not be able to run NBOTools or the accompanying nbo2cube software (https://github.com/jautschbach/nbo2cube) without encountering problems. Likewise, if `parse-namelists` exits with an error prior to generating the overlap matrix, it is probably not safe to use
+The program will output information about the basis set and other data that were present in the `.47` file and attempt to calculate the overlap matrix and compare it to the original overlap matrix from the `.47` file. If those are not the same within tight numerical thresholds, you will likely not be able to run NBOTools or the accompanying nbo2cube software (https://github.com/jautschbach/nbo2cube) without encountering problems. Likewise, if `parse-namelists` exits with an error prior to generating the overlap matrix, it is probably not safe to use
 the corresponding `.47` file with NBOTools or nbo2cube.
 
 
