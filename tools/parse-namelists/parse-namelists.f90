@@ -1,7 +1,9 @@
 program parse_namelists
   
   ! process a file with data in namelist variables equivalent to
-  ! an NBO FILE47. Then call some useful routines
+  ! an NBO FILE47. Then test the basis set convention and calculate
+  ! the overlap matrix & check if it is the same as the overlap
+  ! coming from FILE47.
 
   ! module constants_parameters contains definitions of some
   ! hardcoded variables.
@@ -146,7 +148,8 @@ program parse_namelists
   end do
 
   ! ---------------------------------------------------
-  ! variable 'unrest' determines how many spins we have
+  ! variable 'nspin' determines how many spins we have.
+  ! 'unrest' is the same as the OPEN variable in FILE47
   ! ---------------------------------------------------
 
   nspin = 1

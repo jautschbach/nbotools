@@ -15,7 +15,8 @@ subroutine bas_powers(iconv,i,nc,nx,ny,nz,cc)
 
   ! For basis functions that are not simply the same as one Cartesian function,
   ! i.e., dz2, d(xx-yy), and most spherical functions with l>=3, the
-  ! coefficients come from iodata but were tweaked. For example, iodata's
+  ! coefficients come from IOData (https://iodata.readthedocs.io) but 
+  ! were tweaked. For example, IOData's
   !
   ! python tools/harmonics.py none python 2
   !
@@ -25,7 +26,7 @@ subroutine bas_powers(iconv,i,nc,nx,ny,nz,cc)
   ! coefficients from FILE47 must be multiplied into the basis set to
   ! give normalized functions either (i) from plain unnormalized
   ! Cartesians, or (ii) from the spherical functions constructed with
-  ! iodata coefficients after the kind of adjustment by a global
+  ! IOData coefficients after the kind of adjustment by a global
   ! factor mentioned above.
 
   ! Gaussian convention is: primitives must be normalized. The

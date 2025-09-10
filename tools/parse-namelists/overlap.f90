@@ -4,7 +4,6 @@ subroutine overlap_matrix(iconv,smat,nsmat)
 
   ! literature: "Fundamentals of Molecular Integral Evaluation",
   !             JT Ferman, EF Valeev (FV), PDF found at Google.com 08/05
-  !             See fv.pdf in the 'papers' subdirectory.
 
   use definitions
   use constants_parameters
@@ -42,7 +41,7 @@ subroutine overlap_matrix(iconv,smat,nsmat)
 
   if(nx.gt.nsmat) stop 'overlap: nsmat < nx'
 
-  !allocate (smat(nx)) ! output matrix: Overlap of conracted basis fcts.
+  !allocate (smat(nx)) ! output matrix: Overlap of contracted basis fcts.
 
   smat(:) = zero
   
@@ -211,7 +210,7 @@ subroutine overlap_matrix(iconv,smat,nsmat)
 
                   select case(iconv)
                   case (1)
-                    ! ORCA convention: primitive normalization abosrbed in
+                    ! ORCA convention: primitive normalization absorbed in
                     ! the contraction coefficients
                     t1 = one; t2 = one
                     
