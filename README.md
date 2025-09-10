@@ -4,16 +4,16 @@ Utility Software for NBO Calculations
 
 Author: Augustine Obeng, University at Buffalo, SUNY, J. Autschbach research group
 
-(`parse-namelists`, included in the repository, was written by Jochen Autschbach, University at Buffalo, SUNY)
+(The parse-namelists code, included in the repository, was written by Jochen Autschbach, University at Buffalo, SUNY)
 
 Literature: https://doi.org/10.26434/chemrxiv-2025-csjxr-v2
 
 
 ## Overview
 
-`NBOTools` is a Python script (`main.py` in directory `packages`) designed to parse and analyze output and data files from Natural Bond Orbital (NBO) calculations. The script can perform various analyses, such as  running orthogonality tests, checking energy differences, solving generalized eigenvalue equations in reduced sets of  and providing a menu-driven interface for additional computations such as transformed orbital energies, core-valence orthogonalization, orbital transformations and localizations, and bond order analyses. `NBOTools` places amphasis on utilizing pre-orthogonal NAOS (pNAOs or PNAOs) generated in NBO runs.
+NBOTools is a Python script (`main.py` in directory `packages`) designed to parse and analyze output and data files from Natural Bond Orbital (NBO) calculations. The script can perform various analyses, such as  running orthogonality tests, checking energy differences, solving generalized eigenvalue equations in reduced sets of atomic orbitals, and provides a menu-driven interface for additional computations such as transformed orbital energies, core-valence orthogonalization, orbital transformations and localizations, and bond order analyses. NBOTools places emphasis on utilizing pre-orthogonal NAOS (pNAOs or PNAOs) generated in NBO runs.
 
-The repository also contains, under directory `tools`, a Python script and an accompanying Fortran code `parse-namelists` for rudimentary checks of the NBO `.47` input file to make sure `NBOTools` can handle the basis set specification. Further comments can be found below. 
+The repository also contains, under directory `tools`, a Python script and an accompanying Fortran code `parse-namelists` for checks of NBO `.47` input files, to make sure NBOTools can handle the basis set specifications. Further comments can be found below. 
 
 ## Prerequisites
 
@@ -24,31 +24,32 @@ The repository also contains, under directory `tools`, a Python script and an ac
 
 ## Features
 
-The script provides the following functionalities via an interactive menu:
+The script provides the following functionality via an interactive menu:
 
-* `Get Transformed Orbital Energies`: Computes energies such as AOMO energies.
-* `Get Orbital Transformation`: Performs transformations like AOMO.
-* `Get Operator Matrices`: Retrieves matrices, such as the Fock matrix in the AO basis (if available).
+* `Transform Orbital Energies`: Computes energies such as AOMO energies.
+* `Orbital Transformations`: Performs transformations like AOMO.
+* `Operator Matrices`: Retrieves matrices, such as the Fock matrix in the AO basis (if available).
 * `Orbitals in PNAO Basis`: Computes orbitals in the PNAO basis (e.g., PNAOMO).
 * `Energies in PNAO Basis`: Calculates orbital energies in the PNAO basis (e.g., PNAOMO energy).
 * `Localize Orbitals`: Performs Pipek-Mezey orbital localization.
-* `Perform Bond Order Analysis`: Bond order analysis based on NBO data.
+* `Bond Order Analysis`: Bond order analysis based on NBO data.
 * `Generalized Eigenvalue Equation Solver`: Solves generalized eigenvalue equations.
-0. **Exit**: Terminates the program.
+0. `Exit`: Terminates the program.
 
-*AOPNAO Matrix Options:* When processing the NBO files, the script offers two options for handling the AOPNAO matrix:
+*AOPNAO Matrix Options:* When processing the NBO files, NBOTools offers two options for handling the AOPNAO matrix:
 
 1. Use the NBO-generated AOPNAO (PNAOs in AO basis).
-2. Recalculate AOPNAO from AONAO. SPNAO (Overlap matrix in the PNAO basis) will also be recalculated, which may slightly differ from NBO-generated AOPNAO/SPNAO.
+2. Reconstruct AOPNAO from AONAO. SPNAO (Overlap matrix in the PNAO basis) will also be recalculated, which may slightly differ from NBO-generated AOPNAO/SPNAO.
 
-A standalone script `nao2pnao.py` is provided if one wishes to visualize the regenerated PNAOs.
+A standalone script `nao2pnao.py` is provided if one wishes to visualize the reconstructed PNAOs.
 
 
 ### Additional Features
 
-- `Orthogonality Tests`: Checks the orthogonality of computed orbitals.
+- `Orthogonality Tests`: Checks the orthogonality of calculated orbitals.
 - `Energy Difference Checks`: Analyzes energy differences for validation.
-- **Open Shell Support**: The script supports data files containing separate alpha/beta spin data (e.g., from spin-unrestricted DFT calculations).
+
+NBOTools supports data sets containing separate alpha/beta spin data (e.g., from spin-unrestricted DFT calculations).
 
 ## Usage
 
@@ -76,7 +77,7 @@ A standalone script `nao2pnao.py` is provided if one wishes to visualize the reg
      └── FILENAME.47
      ```
 
-2. Run `NBOTools`:
+2. Run NBOTools:
 
    `python3 main.py`
    
@@ -84,20 +85,21 @@ A standalone script `nao2pnao.py` is provided if one wishes to visualize the reg
 
    - Parse the NBO data files.
    - Display the current working directory and calculation type (e.g., open shell).
-   - Notify you if the Fock matrix is unavailable, which may limit some analyses.
-   - Prompt for AOPNAOs matrix options (see above).
+   - Notify you if the Fock matrix is unavailable, which restrictts certain features.
+   - Prompt for AOPNAO matrix options (see above).
 
 3. Interact with the Menu:
 
-   - After processing the NBO data files, the script presents the NBOTOOLS menu.
+   - After processing the NBO data files, NBOTools presents the menu.
    - Enter a number (0–8) to select an option.
-   - Follow any additional prompts for specific calculations or analyses.
+   - Follow additional prompts for specific calculations or analyses.
 
-4. If you want to test some of the `.47` basis set conventions, use the `parse-namelist` tool under `tools`. There are several example `.47` files provided under directory `tools/file47-examples`. `cd` to this directory and convert the `.47` data to a Fortran namelist input by running  
+4. If you want to test the `.47` file basis set conventions, use the `parse-namelist` code under `tools`. There are several `.47` files provided under directory `tools/file47-examples`. `cd` to this directory and convert the `.47` data to a Fortran namelist input by running  
 `python3 ../convert-47-to-namelists.py <file.47>`  
 which will create a file `file.namelists`. Assuming that the Fortran code in `../parse-namelists` has been compiled (e.g., with `gfortran`, type `make`), you can now run it with the `.namelists` file like this:  
 `../parse-namelists/parse-namelists < file.namelists`  
-The program will output information about the basis set and other data that were present in the `.47` file and at the end calculate the overlap matrix and compare it to the original overlap matrix from the `.47` file. if those are not the saame within tight numerical thresholds, you will likely not be able to run `NBOTools` or the accompanying `nbo2cube` software in https://github.com/jautschbach/nbo2cube without encountering problems. 
+The program will output information about the basis set and other data that were present in the `.47` file and attempt to calculate the overlap matrix and compare it to the original overlap matrix from the `.47` file. If those are not the saame within tight numerical thresholds, you will likely not be able to run NBOTools or the accompanying nbo2cube software (https://github.com/jautschbach/nbo2cube) without encountering problems. Likewise, if `parse-namelists` exits with an error prior to generating the overlap matrix, it is probably not safe to use
+the corresponding `.47` file with NBOTools or nbo2cube.
 
 
 
