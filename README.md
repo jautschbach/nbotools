@@ -47,7 +47,7 @@ A standalone script `nao2pnao.py` is provided if one wishes to visualize the rec
 orbital (GTO)
 basis. Features such as orbital transformations, localization, and others,
 where no explicit information re. basis set exponents or contraction is
-neededi, should work also for Slater-type orbital (STO) basis sets, such as 
+needed, should work also for Slater-type orbital (STO) basis sets, such as 
 with `.47` files coming from 
 calculations with the Amsterdam Density Functional code (https://www.scm.com).
 
