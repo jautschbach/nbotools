@@ -1,0 +1,16 @@
+  AO  ALPHA   6
+ Li 1 (s)  Li 1 (s)  Li 1 (pz) Li 1 (px) Li 1 (py)  H 2 (s)  
+  NAO ALPHA   6
+ Li 1( 1s )Li 1( 2s )Li 1( 2px)Li 1( 2py)Li 1( 2pz) H 2( 1s )
+  NHO ALPHA   6
+ Li 1(cr)  Li 1( H 2) H 2(Li 1)Li 1(ry)  Li 1(ry)  Li 1(ry)  
+  NBO ALPHA   6
+ Li 1(cr)  Li 1- H 2 Li 1- H 2*Li 1(ry)  Li 1(ry)  Li 1(ry)  
+  AO  BETA    6
+ Li 1 (s)  Li 1 (s)  Li 1 (pz) Li 1 (px) Li 1 (py)  H 2 (s)  
+  NAO BETA    6
+ Li 1( 1s )Li 1( 2s )Li 1( 2px)Li 1( 2py)Li 1( 2pz) H 2( 1s )
+  NHO BETA    6
+ Li 1(cr)  Li 1(ry)   H 2(ry)  Li 1(ry)  Li 1(ry)  Li 1(ry)  
+  NBO BETA    6
+ Li 1(cr)  Li 1(lv)   H 2(lv)  Li 1(ry)  Li 1(ry)  Li 1(ry)  

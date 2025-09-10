@@ -1,0 +1,11 @@
+
+__pycache__/
+*.py[codz]
+*$py.class
+*.so
+*.o
+*.mod
+*~
+*.bak
+*.swp
+

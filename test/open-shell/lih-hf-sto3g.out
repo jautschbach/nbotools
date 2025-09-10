@@ -1,0 +1,1164 @@
+
+                                 *****************
+                                 * O   R   C   A *
+                                 *****************
+
+                                            #,                                       
+                                            ###                                      
+                                            ####                                     
+                                            #####                                    
+                                            ######                                   
+                                           ########,                                 
+                                     ,,################,,,,,                         
+                               ,,#################################,,                 
+                          ,,##########################################,,             
+                       ,#########################################, ''#####,          
+                    ,#############################################,,   '####,        
+                  ,##################################################,,,,####,       
+                ,###########''''           ''''###############################       
+              ,#####''   ,,,,##########,,,,          '''####'''          '####       
+            ,##' ,,,,###########################,,,                        '##       
+           ' ,,###''''                  '''############,,,                           
+         ,,##''                                '''############,,,,        ,,,,,,###''
+      ,#''                                            '''#######################'''  
+     '                                                          ''''####''''         
+             ,#######,   #######,   ,#######,      ##                                
+            ,#'     '#,  ##    ##  ,#'     '#,    #''#        ######   ,####,        
+            ##       ##  ##   ,#'  ##            #'  '#       #        #'  '#        
+            ##       ##  #######   ##           ,######,      #####,   #    #        
+            '#,     ,#'  ##    ##  '#,     ,#' ,#      #,         ##   #,  ,#        
+             '#######'   ##     ##  '#######'  #'      '#     #####' # '####'        
+
+
+
+                  #######################################################
+                  #                        -***-                        #
+                  #          Department of theory and spectroscopy      #
+                  #    Directorship and core code : Frank Neese         #
+                  #        Max Planck Institute fuer Kohlenforschung    #
+                  #                Kaiser Wilhelm Platz 1               #
+                  #                 D-45470 Muelheim/Ruhr               #
+                  #                      Germany                        #
+                  #                                                     #
+                  #                  All rights reserved                #
+                  #                        -***-                        #
+                  #######################################################
+
+
+                         Program Version 5.0.3 -  RELEASE  -
+
+
+ With contributions from (in alphabetic order):
+   Daniel Aravena         : Magnetic Suceptibility
+   Michael Atanasov       : Ab Initio Ligand Field Theory (pilot matlab implementation)
+   Alexander A. Auer      : GIAO ZORA, VPT2 properties, NMR spectrum
+   Ute Becker             : Parallelization
+   Giovanni Bistoni       : ED, misc. LED, open-shell LED, HFLD
+   Martin Brehm           : Molecular dynamics
+   Dmytro Bykov           : SCF Hessian
+   Vijay G. Chilkuri      : MRCI spin determinant printing, contributions to CSF-ICE
+   Dipayan Datta          : RHF DLPNO-CCSD density
+   Achintya Kumar Dutta   : EOM-CC, STEOM-CC
+   Dmitry Ganyushin       : Spin-Orbit,Spin-Spin,Magnetic field MRCI
+   Miquel Garcia          : C-PCM and meta-GGA Hessian, CC/C-PCM, Gaussian charge scheme
+   Yang Guo               : DLPNO-NEVPT2, F12-NEVPT2, CIM, IAO-localization
+   Andreas Hansen         : Spin unrestricted coupled pair/coupled cluster methods
+   Benjamin Helmich-Paris : MC-RPA, TRAH-SCF, COSX integrals
+   Lee Huntington         : MR-EOM, pCC
+   Robert Izsak           : Overlap fitted RIJCOSX, COSX-SCS-MP3, EOM
+   Marcus Kettner         : VPT2
+   Christian Kollmar      : KDIIS, OOCD, Brueckner-CCSD(T), CCSD density, CASPT2, CASPT2-K
+   Simone Kossmann        : Meta GGA functionals, TD-DFT gradient, OOMP2, MP2 Hessian
+   Martin Krupicka        : Initial AUTO-CI
+   Lucas Lang             : DCDCAS
+   Marvin Lechner         : AUTO-CI (C++ implementation), FIC-MRCC
+   Dagmar Lenk            : GEPOL surface, SMD
+   Dimitrios Liakos       : Extrapolation schemes; Compound Job, initial MDCI parallelization
+   Dimitrios Manganas     : Further ROCIS development; embedding schemes
+   Dimitrios Pantazis     : SARC Basis sets
+   Anastasios Papadopoulos: AUTO-CI, single reference methods and gradients
+   Taras Petrenko         : DFT Hessian,TD-DFT gradient, ASA, ECA, R-Raman, ABS, FL, XAS/XES, NRVS
+   Peter Pinski           : DLPNO-MP2, DLPNO-MP2 Gradient
+   Christoph Reimann      : Effective Core Potentials
+   Marius Retegan         : Local ZFS, SOC
+   Christoph Riplinger    : Optimizer, TS searches, QM/MM, DLPNO-CCSD(T), (RO)-DLPNO pert. Triples
+   Tobias Risthaus        : Range-separated hybrids, TD-DFT gradient, RPA, STAB
+   Michael Roemelt        : Original ROCIS implementation
+   Masaaki Saitow         : Open-shell DLPNO-CCSD energy and density
+   Barbara Sandhoefer     : DKH picture change effects
+   Avijit Sen             : IP-ROCIS
+   Kantharuban Sivalingam : CASSCF convergence, NEVPT2, FIC-MRCI
+   Bernardo de Souza      : ESD, SOC TD-DFT
+   Georgi Stoychev        : AutoAux, RI-MP2 NMR, DLPNO-MP2 response
+   Willem Van den Heuvel  : Paramagnetic NMR
+   Boris Wezisla          : Elementary symmetry handling
+   Frank Wennmohs         : Technical directorship
+
+
+ We gratefully acknowledge several colleagues who have allowed us to
+ interface, adapt or use parts of their codes:
+   Stefan Grimme, W. Hujo, H. Kruse, P. Pracht,  : VdW corrections, initial TS optimization,
+                  C. Bannwarth, S. Ehlert          DFT functionals, gCP, sTDA/sTD-DF
+   Ed Valeev, F. Pavosevic, A. Kumar             : LibInt (2-el integral package), F12 methods
+   Garnet Chan, S. Sharma, J. Yang, R. Olivares  : DMRG
+   Ulf Ekstrom                                   : XCFun DFT Library
+   Mihaly Kallay                                 : mrcc  (arbitrary order and MRCC methods)
+   Jiri Pittner, Ondrej Demel                    : Mk-CCSD
+   Frank Weinhold                                : gennbo (NPA and NBO analysis)
+   Christopher J. Cramer and Donald G. Truhlar   : smd solvation model
+   Lars Goerigk                                  : TD-DFT with DH, B97 family of functionals
+   V. Asgeirsson, H. Jonsson                     : NEB implementation
+   FAccTs GmbH                                   : IRC, NEB, NEB-TS, DLPNO-Multilevel, CI-OPT
+                                                   MM, QMMM, 2- and 3-layer-ONIOM, Crystal-QMMM,
+                                                   LR-CPCM, SF, NACMEs, symmetry and pop. for TD-DFT,
+                                                   nearIR, NL-DFT gradient (VV10), updates on ESD,
+                                                   ML-optimized integration grids
+   S Lehtola, MJT Oliveira, MAL Marques          : LibXC Library
+   Liviu Ungur et al                             : ANISO software
+
+
+ Your calculation uses the libint2 library for the computation of 2-el integrals
+ For citations please refer to: http://libint.valeyev.net
+
+ Your ORCA version has been built with support for libXC version: 5.1.0
+ For citations please refer to: https://tddft.org/programs/libxc/
+
+ This ORCA versions uses:
+   CBLAS   interface :  Fast vector & matrix operations
+   LAPACKE interface :  Fast linear algebra routines
+   SCALAPACK package :  Parallel linear algebra routines
+   Shared memory     :  Shared parallel matrices
+   BLAS/LAPACK       :  OpenBLAS 0.3.15  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Haswell SINGLE_THREADED
+        Core in use  :  Haswell
+   Copyright (c) 2011-2014, The OpenBLAS Project
+
+
+================================================================================
+
+----- Orbital basis set information -----
+Your calculation utilizes the basis: STO-3G
+   H-Ne       : W. J. Hehre, R. F. Stewart and J. A. Pople, J. Chem. Phys. 2657 (1969).
+   Na-Ar      : W. J. Hehre, R. Ditchfield, R. F. Stewart and J. A. Pople, J. Chem. Phys. 2769 (1970).
+   K,Ca,Ga-Kr : W. J. Pietro, B. A. Levy, W. J. Hehre and R. F. Stewart, J. Am. Chem. Soc. 19, 2225 (1980).
+   Sc-Zn,Y-Cd : W. J. Pietro and W. J. Hehre, J. Comp. Chem. 4, 241 (1983).
+
+================================================================================
+                                        WARNINGS
+                       Please study these warnings very carefully!
+================================================================================
+
+
+WARNING: your system is open-shell and RHF/RKS was chosen
+  ===> : WILL SWITCH to UHF/UKS
+
+
+INFO   : the flag for use of the SHARK integral package has been found!
+
+================================================================================
+                                       INPUT FILE
+================================================================================
+NAME = lih-hf-sto3g.inp
+|  1> %pal nprocs 1 end
+|  2> %maxcore 3000
+|  3> ! HF STO-3G nbo printbasis
+|  4> ! verytightscf
+|  5> # B3LYP is here the method (DFT functional), def2-SVP the basis set and Opt is the jobtype (geometry optimization). 
+|  6> # Order of the keywords is not important.
+|  7> 
+|  8> 
+|  9> %nbo
+| 10> NBOKEYLIST = "$NBO bndidx NPA NLMO  AONLMO=W  ARCHIVE NLMO file=lih-hf-sto3g $END"
+| 11> end
+| 12> 
+| 13> #%output
+| 14> #PrintLevel Normal
+| 15> #Print[ P_NPA ] 1
+| 16> #Print[ P_NBO ] 1 # turn print off
+| 17>  # turn print on
+| 18> # some flags are more sophisticated
+| 19> #end
+| 20> 
+| 21> * xyz 1 2
+| 22>  Li                 1.14823317   -0.07186255    0.01409127
+| 23>  H                 -0.38176683   -0.07186255    0.01409127
+| 24> *
+| 25> 
+| 26> 
+| 27> 
+| 28>                          ****END OF INPUT****
+================================================================================
+
+                       ****************************
+                       * Single Point Calculation *
+                       ****************************
+
+---------------------------------
+CARTESIAN COORDINATES (ANGSTROEM)
+---------------------------------
+  Li     1.148233   -0.071863    0.014091
+  H     -0.381767   -0.071863    0.014091
+
+----------------------------
+CARTESIAN COORDINATES (A.U.)
+----------------------------
+  NO LB      ZA    FRAG     MASS         X           Y           Z
+   0 Li    3.0000    0     6.941    2.169846   -0.135801    0.026629
+   1 H     1.0000    0     1.008   -0.721435   -0.135801    0.026629
+
+--------------------------------
+INTERNAL COORDINATES (ANGSTROEM)
+--------------------------------
+ Li     0   0   0     0.000000000000     0.00000000     0.00000000
+ H      1   0   0     1.530000000000     0.00000000     0.00000000
+
+---------------------------
+INTERNAL COORDINATES (A.U.)
+---------------------------
+ Li     0   0   0     0.000000000000     0.00000000     0.00000000
+ H      1   0   0     2.891280984900     0.00000000     0.00000000
+
+---------------------
+BASIS SET INFORMATION
+---------------------
+There are 2 groups of distinct atoms
+
+ Group   1 Type Li  : 6s3p contracted to 2s1p pattern {33/3}
+ Group   2 Type H   : 3s contracted to 1s pattern {3}
+
+Atom   0Li   basis set group =>   1
+Atom   1H    basis set group =>   2
+
+-------------------------
+BASIS SET IN INPUT FORMAT
+-------------------------
+
+ # Basis set for element : H 
+ NewGTO H 
+ S 3 
+   1       3.4252509100      0.1543289707
+   2       0.6239137300      0.5353281424
+   3       0.1688554000      0.4446345420
+  end;
+
+ # Basis set for element : Li
+ NewGTO Li
+ S 3 
+   1      16.1195750000      0.1543289703
+   2       2.9362007000      0.5353281412
+   3       0.7946505000      0.4446345410
+ S 3 
+   1       0.6362897000     -0.0999672298
+   2       0.1478601000      0.3995128292
+   3       0.0480887000      0.7001154686
+ P 3 
+   1       0.6362897000      0.1559162650
+   2       0.1478601000      0.6076837007
+   3       0.0480887000      0.3919573775
+  end;
+
+------------------------------------------------------------------------------
+                           ORCA GTO INTEGRAL CALCULATION
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                   ___                                                        
+                  /   \      - P O W E R E D   B Y -                         
+                 /     \                                                     
+                 |  |  |   _    _      __       _____    __    __             
+                 |  |  |  | |  | |    /  \     |  _  \  |  |  /  |          
+                  \  \/   | |  | |   /    \    | | | |  |  | /  /          
+                 / \  \   | |__| |  /  /\  \   | |_| |  |  |/  /          
+                |  |  |   |  __  | /  /__\  \  |    /   |      \           
+                |  |  |   | |  | | |   __   |  |    \   |  |\   \          
+                \     /   | |  | | |  |  |  |  | |\  \  |  | \   \       
+                 \___/    |_|  |_| |__|  |__|  |_| \__\ |__|  \__/        
+                                                                              
+                      - O R C A' S   B I G   F R I E N D -                    
+                                      &                                       
+                       - I N T E G R A L  F E E D E R -                       
+                                                                              
+ v1 FN, 2020, v2 2021                                                         
+------------------------------------------------------------------------------
+
+
+Reading SHARK input file lih-hf-sto3g.SHARKINP.tmp ... ok
+----------------------
+SHARK INTEGRAL PACKAGE
+----------------------
+
+Number of atoms                             ...      2
+Number of basis functions                   ...      6
+Number of shells                            ...      4
+Maximum angular momentum                    ...      1
+Integral batch strategy                     ... SHARK/LIBINT Hybrid
+RI-J (if used) integral strategy            ... SPLIT-RIJ (Revised 2003 algorithm where possible)
+Printlevel                                  ...      1
+Contraction scheme used                     ... SEGMENTED contraction
+Coulomb Range Separation                    ... NOT USED
+Exchange Range Separation                   ... NOT USED
+Finite Nucleus Model                        ... NOT USED
+Auxiliary Coulomb fitting basis             ... NOT available
+Auxiliary J/K fitting basis                 ... NOT available
+Auxiliary Correlation fitting basis         ... NOT available
+Auxiliary 'external' fitting basis          ... NOT available
+Integral threshold                          ...     1.000000e-12
+Primitive cut-off                           ...     1.000000e-14
+Primitive pair pre-selection threshold      ...     1.000000e-14
+
+Calculating pre-screening integrals         ... done (  0.0 sec) Dimension = 4
+Organizing shell pair data                  ... done (  0.0 sec)
+Shell pair information
+Total number of shell pairs                 ...        10
+Shell pairs after pre-screening             ...        10
+Total number of primitive shell pairs       ...        90
+Primitive shell pairs kept                  ...        90
+          la=0 lb=0:      6 shell pairs
+          la=1 lb=0:      3 shell pairs
+          la=1 lb=1:      1 shell pairs
+
+Calculating one electron integrals          ... done (  0.0 sec)
+Calculating Nuclear repulsion               ... done (  0.0 sec) ENN=      1.037602369216 Eh
+
+SHARK setup successfully completed in   0.1 seconds
+
+Maximum memory used throughout the entire GTOINT-calculation: 3.9 MB
+-------------------------------------------------------------------------------
+                                 ORCA SCF
+-------------------------------------------------------------------------------
+
+------------
+SCF SETTINGS
+------------
+Hamiltonian:
+ Ab initio Hamiltonian  Method          .... Hartree-Fock(GTOs)
+
+
+General Settings:
+ Integral files         IntName         .... lih-hf-sto3g
+ Hartree-Fock type      HFTyp           .... UHF
+ Total Charge           Charge          ....    1
+ Multiplicity           Mult            ....    2
+ Number of Electrons    NEL             ....    3
+ Basis Dimension        Dim             ....    6
+ Nuclear Repulsion      ENuc            ....      1.0376023692 Eh
+
+Convergence Acceleration:
+ DIIS                   CNVDIIS         .... on
+   Start iteration      DIISMaxIt       ....    12
+   Startup error        DIISStart       ....  0.200000
+   # of expansion vecs  DIISMaxEq       ....     5
+   Bias factor          DIISBfac        ....   1.050
+   Max. coefficient     DIISMaxC        ....  10.000
+ Trust-Rad. Augm. Hess. CNVTRAH         .... auto
+   Auto Start mean grad. ratio tolernc. ....  1.125000
+   Auto Start start iteration           ....    20
+   Auto Start num. interpolation iter.  ....    10
+   Max. Number of Micro iterations      ....    16
+   Max. Number of Macro iterations      .... Maxiter - #DIIS iter
+   Number of Davidson start vectors     ....     2
+   Converg. threshold I  (grad. norm)   ....   2.000e-06
+   Converg. threshold II (energy diff.) ....   1.000e-09
+   Grad. Scal. Fac. for Micro threshold ....   0.100
+   Minimum threshold for Micro iter.    ....   0.010
+   NR start threshold (gradient norm)   ....   0.001
+   Initial trust radius                 ....   0.400
+   Minimum AH scaling param. (alpha)    ....   1.000
+   Maximum AH scaling param. (alpha)    .... 1000.000
+   Orbital update algorithm             .... Taylor
+   White noise on init. David. guess    .... on
+   Maximum white noise                  ....   0.010
+   Quad. conv. algorithm                .... NR
+ SOSCF                  CNVSOSCF        .... off
+ Level Shifting         CNVShift        .... on
+   Level shift para.    LevelShift      ....    0.2500
+   Turn off err/grad.   ShiftErr        ....    0.0010
+ Zerner damping         CNVZerner       .... off
+ Static damping         CNVDamp         .... on
+   Fraction old density DampFac         ....    0.7000
+   Max. Damping (<1)    DampMax         ....    0.9800
+   Min. Damping (>=0)   DampMin         ....    0.0000
+   Turn off err/grad.   DampErr         ....    0.1000
+ Fernandez-Rico         CNVRico         .... off
+
+SCF Procedure:
+ Maximum # iterations   MaxIter         ....   125
+ SCF integral mode      SCFMode         .... Direct
+   Integral package                     .... SHARK and LIBINT hybrid scheme
+ Reset frequency        DirectResetFreq ....    20
+ Integral Threshold     Thresh          ....  1.000e-12 Eh
+ Primitive CutOff       TCut            ....  1.000e-14 Eh
+
+Convergence Tolerance:
+ Convergence Check Mode ConvCheckMode   .... Total+1el-Energy
+ Convergence forced     ConvForced      .... 0
+ Energy Change          TolE            ....  1.000e-09 Eh
+ 1-El. energy change                    ....  1.000e-06 Eh
+ DIIS Error             TolErr          ....  1.000e-08
+
+
+Diagonalization of the overlap matrix:
+Smallest eigenvalue                        ... 3.276e-01
+Time for diagonalization                   ...    0.000 sec
+Threshold for overlap eigenvalues          ... 1.000e-08
+Number of eigenvalues below threshold      ... 0
+Time for construction of square roots      ...    0.000 sec
+Total time needed                          ...    0.000 sec
+
+Time for model grid setup =    0.009 sec
+
+------------------------------
+INITIAL GUESS: MODEL POTENTIAL
+------------------------------
+Loading Hartree-Fock densities                     ... done
+Calculating cut-offs                               ... done
+Initializing the effective Hamiltonian             ... done
+Setting up the integral package (SHARK)            ... done
+Starting the Coulomb interaction                   ... done (   0.0 sec)
+Reading the grid                                   ... done
+Mapping shells                                     ... done
+Starting the XC term evaluation                    ... done (   0.0 sec)
+Transforming the Hamiltonian                       ... done (   0.0 sec)
+Diagonalizing the Hamiltonian                      ... done (   0.0 sec)
+Back transforming the eigenvectors                 ... done (   0.0 sec)
+Now organizing SCF variables                       ... done
+                      ------------------
+                      INITIAL GUESS DONE (   0.0 sec)
+                      ------------------
+--------------
+SCF ITERATIONS
+--------------
+ITER       Energy         Delta-E        Max-DP      RMS-DP      [F,P]     Damp
+               ***  Starting incremental Fock matrix formation  ***
+  0     -7.5968037750   0.000000000000 0.03124479  0.00413379  0.0549912 0.7000
+  1     -7.5994457706  -0.002641995558 0.03150615  0.00412118  0.0421010 0.7000
+                               ***Turning on DIIS***
+  2     -7.6017299815  -0.002284210901 0.08976756  0.01168444  0.0346387 0.0000
+  3     -7.6087346998  -0.007004718393 0.03805520  0.00488901  0.0135708 0.0000
+  4     -7.6098523991  -0.001117699205 0.01582453  0.00205477  0.0054058 0.0000
+  5     -7.6097907602   0.000061638900 0.00520460  0.00069098  0.0018778 0.0000
+  6     -7.6096167557   0.000174004408 0.00152477  0.00022090  0.0005587 0.0000
+  7     -7.6095385429   0.000078212867 0.00011092  0.00001847  0.0000707 0.0000
+  8     -7.6095384083   0.000000134562 0.00002163  0.00000288  0.0000079 0.0000
+  9     -7.6095390404  -0.000000632120 0.00000050  0.00000007  0.0000003 0.0000
+ 10     -7.6095390672  -0.000000026724 0.00000005  0.00000001  0.0000000 0.0000
+                 **** Energy Check signals convergence ****
+
+               *****************************************************
+               *                     SUCCESS                       *
+               *           SCF CONVERGED AFTER  11 CYCLES          *
+               *****************************************************
+
+
+----------------
+TOTAL SCF ENERGY
+----------------
+
+Total Energy       :           -7.60953907 Eh            -207.06609 eV
+
+Components:
+Nuclear Repulsion  :            1.03760237 Eh              28.23460 eV
+Electronic Energy  :           -8.64714144 Eh            -235.30068 eV
+One Electron Energy:          -11.01490660 Eh            -299.73085 eV
+Two Electron Energy:            2.36776517 Eh              64.43017 eV
+
+Virial components:
+Potential Energy   :          -15.28832157 Eh            -416.01638 eV
+Kinetic Energy     :            7.67878250 Eh             208.95029 eV
+Virial Ratio       :            1.99098250
+
+
+---------------
+SCF CONVERGENCE
+---------------
+
+  Last Energy change         ...   -2.3048e-10  Tolerance :   1.0000e-09
+  Last MAX-Density change    ...    3.2545e-09  Tolerance :   1.0000e-08
+  Last RMS-Density change    ...    4.2970e-10  Tolerance :   1.0000e-09
+  Last DIIS Error            ...    7.8034e-10  Tolerance :   1.0000e-08
+
+             **** THE GBW FILE WAS UPDATED (lih-hf-sto3g.gbw) ****
+             **** DENSITY lih-hf-sto3g.scfp WAS UPDATED ****
+             **** ENERGY FILE WAS UPDATED (lih-hf-sto3g.en.tmp) ****
+----------------------
+UHF SPIN CONTAMINATION
+----------------------
+
+Expectation value of <S**2>     :     0.750003
+Ideal value S*(S+1) for S=0.5   :     0.750000
+Deviation                       :     0.000003
+
+             **** THE GBW FILE WAS UPDATED (lih-hf-sto3g.gbw) ****
+             **** DENSITY lih-hf-sto3g.scfp WAS UPDATED ****
+----------------
+ORBITAL ENERGIES
+----------------
+                 SPIN UP ORBITALS
+  NO   OCC          E(Eh)            E(eV) 
+   0   1.0000      -2.733575       -74.3844 
+   1   1.0000      -0.819933       -22.3115 
+   2   0.0000      -0.152435        -4.1480 
+   3   0.0000      -0.104008        -2.8302 
+   4   0.0000      -0.104008        -2.8302 
+   5   0.0000       0.146825         3.9953 
+
+                 SPIN DOWN ORBITALS
+  NO   OCC          E(Eh)            E(eV) 
+   0   1.0000      -2.725868       -74.1746 
+   1   0.0000      -0.235392        -6.4053 
+   2   0.0000      -0.136903        -3.7253 
+   3   0.0000      -0.092753        -2.5239 
+   4   0.0000      -0.092753        -2.5239 
+   5   0.0000       0.311270         8.4701 
+
+                    ********************************
+                    * MULLIKEN POPULATION ANALYSIS *
+                    ********************************
+
+--------------------------------------------
+MULLIKEN ATOMIC CHARGES AND SPIN POPULATIONS
+--------------------------------------------
+   0 Li:    0.803175    0.196991
+   1 H :    0.196825    0.803009
+Sum of atomic charges         :    1.0000000
+Sum of atomic spin populations:    1.0000000
+
+-----------------------------------------------------
+MULLIKEN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS
+-----------------------------------------------------
+CHARGE
+  0 Lis       :     2.077770  s :     2.077770
+      pz      :     0.000000  p :     0.119055
+      px      :     0.119055
+      py      :     0.000000
+  1 H s       :     0.803175  s :     0.803175
+
+SPIN
+  0 Lis       :     0.077938  s :     0.077938
+      pz      :     0.000000  p :     0.119053
+      px      :     0.119053
+      py      :     0.000000
+  1 H s       :     0.803009  s :     0.803009
+
+
+                     *******************************
+                     * LOEWDIN POPULATION ANALYSIS *
+                     *******************************
+
+-------------------------------------------
+LOEWDIN ATOMIC CHARGES AND SPIN POPULATIONS
+-------------------------------------------
+   0 Li:    0.728735    0.273592
+   1 H :    0.271265    0.726408
+
+----------------------------------------------------
+LOEWDIN REDUCED ORBITAL CHARGES AND SPIN POPULATIONS
+----------------------------------------------------
+CHARGE
+  0 Lis       :     2.103710  s :     2.103710
+      pz      :     0.000000  p :     0.167554
+      px      :     0.167554
+      py      :     0.000000
+  1 H s       :     0.728735  s :     0.728735
+
+SPIN
+  0 Lis       :     0.106045  s :     0.106045
+      pz      :     0.000000  p :     0.167547
+      px      :     0.167547
+      py      :     0.000000
+  1 H s       :     0.726408  s :     0.726408
+
+
+                      *****************************
+                      * MAYER POPULATION ANALYSIS *
+                      *****************************
+
+  NA   - Mulliken gross atomic population
+  ZA   - Total nuclear charge
+  QA   - Mulliken gross atomic charge
+  VA   - Mayer's total valence
+  BVA  - Mayer's bonded valence
+  FA   - Mayer's free valence
+
+  ATOM       NA         ZA         QA         VA         BVA        FA
+  0 Li     2.1968     3.0000     0.8032     0.3556     0.3164     0.0391
+  1 H      0.8032     1.0000     0.1968     0.9613     0.3164     0.6448
+
+  Mayer bond orders larger than 0.100000
+B(  0-Li,  1-H ) :   0.3164 
+
+Now starting NBO....
+
+ *********************************** NBO 6.0 ***********************************
+             N A T U R A L   A T O M I C   O R B I T A L   A N D
+          N A T U R A L   B O N D   O R B I T A L   A N A L Y S I S
+ ********* University at Buffalo Center for Computational Res (101245) *********
+  (c) Copyright 1996-2018 Board of Regents of the University of Wisconsin System
+      on behalf of the Theoretical Chemistry Institute.  All rights reserved.
+
+          Cite this program as:
+
+          NBO 6.0.  E. D. Glendening, J. K. Badenhoop, A. E. Reed,
+          J. E. Carpenter, J. A. Bohmann, C. M. Morales, C. R. Landis,
+          and F. Weinhold (Theoretical Chemistry Institute, University
+          of Wisconsin, Madison, WI, 2013); http://nbo6.chem.wisc.edu/
+
+       /NPA    / : Natural Population Analysis
+       /NLMO   / : Form natural localized molecular orbitals
+       /AONLMO / : Write the AO to NLMO transformation to lfn39
+       /ARCHIVE/ : Write the archive file to lfn47
+       /BNDIDX / : Print bond indices based on the NAO density matrix
+       /FILE   / : Set to lih-hf-sto3g
+
+ Filename set to lih-hf-sto3g
+
+ Job title:  ORCA Job: lih-hf-sto3g
+
+
+ NATURAL POPULATIONS:  Natural atomic orbital occupancies
+
+  NAO Atom No lang   Type(AO)    Occupancy     Spin
+ -----------------------------------------------------
+   1   Li  1  s      Cor( 1s)     2.00000     0.00000
+   2   Li  1  s      Val( 2s)     0.03258     0.03258
+   3   Li  1  px     Ryd( 2p)     0.02442     0.02442
+   4   Li  1  py     Ryd( 2p)     0.00000     0.00000
+   5   Li  1  pz     Ryd( 2p)     0.00000     0.00000
+
+   6    H  2  s      Val( 1s)     0.94300     0.94300
+
+
+ Summary of Natural Population Analysis:
+
+                                     Natural Population                 Natural
+             Natural    ---------------------------------------------    Spin
+  Atom No    Charge        Core      Valence    Rydberg      Total      Density
+ -------------------------------------------------------------------------------
+   Li  1    0.94300      2.00000     0.03258    0.02442     2.05700     0.05700
+    H  2    0.05700      0.00000     0.94300    0.00000     0.94300     0.94300
+ ===============================================================================
+ * Total *  1.00000      2.00000     0.97559    0.02442     3.00000     1.00000
+
+                                 Natural Population
+ ---------------------------------------------------------
+   Core                       2.00000 ( 99.9998% of    2)
+   Valence                    0.97559 ( 97.5586% of    1)
+   Natural Minimal Basis      2.97558 ( 99.1861% of    3)
+   Natural Rydberg Basis      0.02442 (  0.8139% of    3)
+ ---------------------------------------------------------
+
+    Atom No         Natural Electron Configuration
+ ----------------------------------------------------------------------------
+     Li  1      [core]2s( 0.03)2p( 0.02)
+      H  2            1s( 0.94)
+
+
+ Wiberg bond index matrix in the NAO basis:
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.1075
+   2.  H  0.1075  0.0000
+
+
+ Wiberg bond index, Totals by atom:
+
+     Atom    1
+     ---- ------
+   1. Li  0.1075
+   2.  H  0.1075
+
+
+ NBI: Natural Binding Index (NCU strength parameters)
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.2333
+   2.  H  0.2333  0.0000
+
+
+ ***************************************************
+ *******         Alpha spin orbitals         *******
+ ***************************************************
+
+
+ NATURAL POPULATIONS:  Natural atomic orbital occupancies
+
+  NAO Atom No lang   Type(AO)    Occupancy      Energy
+ -------------------------------------------------------
+   1   Li  1  s      Cor( 1s)     1.00000      -2.73349
+   2   Li  1  s      Val( 2s)     0.03258      -0.14046
+   3   Li  1  px     Ryd( 2p)     0.02442       0.08358
+   4   Li  1  py     Ryd( 2p)     0.00000      -0.10401
+   5   Li  1  pz     Ryd( 2p)     0.00000      -0.10401
+
+   6    H  2  s      Val( 1s)     0.94300      -0.76875
+
+
+ Summary of Natural Population Analysis:
+
+                                     Natural Population
+             Natural    ---------------------------------------------
+  Atom No    Charge        Core      Valence    Rydberg      Total
+ --------------------------------------------------------------------
+   Li  1    0.44300      1.00000     0.03258    0.02442     1.05700
+    H  2   -0.44300      0.00000     0.94300    0.00000     0.94300
+ ====================================================================
+ * Total *  0.00000      1.00000     0.97558    0.02442     2.00000
+
+                                 Natural Population
+ ---------------------------------------------------------
+   Core                       1.00000 ( 99.9998% of    1)
+   Valence                    0.97558 ( 97.5584% of    1)
+   Natural Minimal Basis      1.97558 ( 98.7791% of    2)
+   Natural Rydberg Basis      0.02442 (  1.2209% of    2)
+ ---------------------------------------------------------
+
+    Atom No         Natural Electron Configuration
+ ----------------------------------------------------------------------------
+     Li  1      [core]2s( 0.03)2p( 0.02)
+      H  2            1s( 0.94)
+
+
+ Wiberg bond index matrix in the NAO basis:
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.1075
+   2.  H  0.1075  0.0000
+
+
+ Wiberg bond index, Totals by atom:
+
+     Atom    1
+     ---- ------
+   1. Li  0.1075
+   2.  H  0.1075
+
+
+ NBI: Natural Binding Index (NCU strength parameters)
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.2318
+   2.  H  0.2318  0.0000
+
+
+ NATURAL BOND ORBITAL ANALYSIS, alpha spin orbitals:
+
+                            Occupancies       Lewis Structure    Low   High
+         Max    Occ     -------------------  -----------------   occ   occ
+  Cycle  Ctr   Thresh    Lewis   non-Lewis     CR  BD  nC  LP    (L)   (NL)
+ ============================================================================
+    1     2     0.95     2.00000   0.00000      1   1   0   0     0      0
+ ----------------------------------------------------------------------------
+
+ Structure accepted: No low occupancy Lewis orbitals
+
+ -------------------------------------------------------
+   Core                      1.00000 (100.000% of   1)
+   Valence Lewis             1.00000 (100.000% of   1)
+  ==================      =============================
+   Total Lewis               2.00000 (100.000% of   2)
+  -----------------------------------------------------
+   Valence non-Lewis         0.00000 (  0.000% of   2)
+   Rydberg non-Lewis         0.00000 (  0.000% of   2)
+  ==================      =============================
+   Total non-Lewis           0.00000 (  0.000% of   2)
+ -------------------------------------------------------
+
+
+     (Occupancy)   Bond orbital / Coefficients / Hybrids
+ ------------------ Lewis ------------------------------------------------------
+   1. (1.00000) CR ( 1)Li  1            s(100.00%)
+                                         1.0000  0.0000  0.0000  0.0000  0.0000
+   2. (1.00000) BD ( 1)Li  1- H  2
+               (  5.70%)   0.2387*Li  1 s( 57.16%)p 0.75( 42.84%)
+                                         0.0000  0.7561 -0.6545  0.0000  0.0000
+               ( 94.30%)   0.9711* H  2 s(100.00%)
+                                         1.0000
+ ---------------- non-Lewis ----------------------------------------------------
+   3. (0.00000) BD*( 1)Li  1- H  2
+               ( 94.30%)   0.9711*Li  1 s( 57.16%)p 0.75( 42.84%)
+               (  5.70%)  -0.2387* H  2 s(100.00%)
+   4. (0.00000) RY ( 1)Li  1            s( 42.84%)p 1.33( 57.16%)
+   5. (0.00000) RY ( 2)Li  1            s(  0.00%)p 1.00(100.00%)
+   6. (0.00000) RY ( 3)Li  1            s(  0.00%)p 1.00(100.00%)
+
+
+ NHO DIRECTIONALITY AND BOND BENDING (deviation from line of nuclear centers at
+                                      the position of maximum hybrid amplitude)
+
+         [Thresholds for printing:  angular deviation  >  1.0 degree]
+                                    p- or d-character  > 25.0%
+                                    orbital occupancy  >  0.10e
+
+                        Line of Centers        Hybrid 1             Hybrid 2
+                        ---------------  -------------------  ------------------
+           NBO            Theta   Phi    Theta   Phi    Dev   Theta   Phi    Dev
+ ===============================================================================
+ Failed to locate density maximum for hybrid 2 on center 1
+
+
+ SECOND ORDER PERTURBATION THEORY ANALYSIS OF FOCK MATRIX IN NBO BASIS
+
+     Threshold for printing:   0.25 kcal/mol
+                                                          E(2) E(NL)-E(L) F(L,NL)
+      Donor (L) NBO              Acceptor (NL) NBO      kcal/mol   a.u.    a.u.
+ ===============================================================================
+
+ within unit  1
+       None above threshold
+
+
+ NATURAL BOND ORBITALS (Summary):
+
+                                                     Principal Delocalizations
+           NBO                 Occupancy    Energy   (geminal,vicinal,remote)
+ ===============================================================================
+ Molecular unit  1  (HLi)
+ ------ Lewis --------------------------------------
+    1. CR ( 1)Li  1             1.00000    -2.73349
+    2. BD ( 1)Li  1- H  2       1.00000    -0.82001
+ ------ non-Lewis ----------------------------------
+    3. BD*( 1)Li  1- H  2       0.00000     0.07944
+    4. RY ( 1)Li  1             0.00000    -0.08506
+    5. RY ( 2)Li  1             0.00000    -0.10401
+    6. RY ( 3)Li  1             0.00000    -0.10401
+          -------------------------------
+                 Total Lewis    2.00000  ( 99.9999%)
+           Valence non-Lewis    0.00000  (  0.0001%)
+           Rydberg non-Lewis    0.00000  (  0.0000%)
+          -------------------------------
+               Total unit  1    2.00000  (100.0000%)
+              Charge unit  1    0.00000
+
+
+ NATURAL LOCALIZED MOLECULAR ORBITAL (NLMO) ANALYSIS:
+
+ 1 pass over DM reduced the maximum off-diagonal element to 0.92E-15
+
+ Hybridization/Polarization Analysis of NLMOs in NAO Basis, Alpha Spin:
+ NLMO / Occupancy / Percent from Parent NBO / Atomic Hybrid Contributions
+ -------------------------------------------------------------------------------
+   1. (1.00000)  99.9998% CR ( 1)Li  1
+                         100.000% Li  1 s(100.00%)p 0.00(  0.00%)
+   2. (1.00000) 100.0000% BD ( 1)Li  1- H  2
+                           5.700% Li  1 s( 57.16%)p 0.75( 42.84%)
+                          94.300%  H  2 s(100.00%)
+
+ Individual LMO bond orders greater than 0.002 in magnitude,
+ with the overlap between the hybrids in the NLMO given:
+
+ Atom I / Atom J / NLMO / Bond Order / Hybrid Overlap /
+    1       2       2     0.0569989       0.6490880
+
+
+ Atom-Atom Net Linear NLMO/NPA Bond Orders:
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.0570
+   2.  H  0.0570  0.0000
+
+
+ Linear NLMO/NPA Bond Orders, Totals by Atom:
+
+     Atom    1
+     ---- ------
+   1. Li  0.0570
+   2.  H  0.0570
+
+
+ ***************************************************
+ *******         Beta  spin orbitals         *******
+ ***************************************************
+
+
+ NATURAL POPULATIONS:  Natural atomic orbital occupancies
+
+  NAO Atom No lang   Type(AO)    Occupancy      Energy
+ -------------------------------------------------------
+   1   Li  1  s      Cor( 1s)     1.00000      -2.72586
+   2   Li  1  s      Val( 2s)     0.00000      -0.12055
+   3   Li  1  px     Ryd( 2p)     0.00000       0.12726
+   4   Li  1  py     Ryd( 2p)     0.00000      -0.09275
+   5   Li  1  pz     Ryd( 2p)     0.00000      -0.09275
+
+   6    H  2  s      Val( 1s)     0.00000      -0.06774
+
+
+ Summary of Natural Population Analysis:
+
+                                     Natural Population
+             Natural    ---------------------------------------------
+  Atom No    Charge        Core      Valence    Rydberg      Total
+ --------------------------------------------------------------------
+   Li  1    0.50000      1.00000     0.00000    0.00000     1.00000
+    H  2    0.50000      0.00000     0.00000    0.00000     0.00000
+ ====================================================================
+ * Total *  1.00000      1.00000     0.00000    0.00000     1.00000
+
+                                 Natural Population
+ ---------------------------------------------------------
+   Core                       1.00000 ( 99.9997% of    1)
+   Valence                    0.00000 (  0.0000% of    0)
+   Natural Minimal Basis      1.00000 (100.0000% of    1)
+   Natural Rydberg Basis      0.00000 (  0.0000% of    1)
+ ---------------------------------------------------------
+
+    Atom No         Natural Electron Configuration
+ ----------------------------------------------------------------------------
+     Li  1      [core]
+      H  2
+
+
+ Wiberg bond index matrix in the NAO basis:
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.0000
+   2.  H  0.0000  0.0000
+
+
+ Wiberg bond index, Totals by atom:
+
+     Atom    1
+     ---- ------
+   1. Li  0.0000
+   2.  H  0.0000
+
+
+ NBI: Natural Binding Index (NCU strength parameters)
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.0014
+   2.  H  0.0014  0.0000
+
+
+ NATURAL BOND ORBITAL ANALYSIS, beta spin orbitals:
+
+                            Occupancies       Lewis Structure    Low   High
+         Max    Occ     -------------------  -----------------   occ   occ
+  Cycle  Ctr   Thresh    Lewis   non-Lewis     CR  BD  nC  LP    (L)   (NL)
+ ============================================================================
+    1     2     0.95     1.00000   0.00000      1   0   0   0     0      0
+ ----------------------------------------------------------------------------
+
+ Structure accepted: No low occupancy Lewis orbitals
+
+ The molecular units found in the alpha and beta manifolds are inequivalent.
+ For labelling purposes, the molecular units of the beta system will be used.
+
+ -------------------------------------------------------
+   Core                      1.00000 (100.000% of   1)
+  ==================      =============================
+   Total Lewis               1.00000 (100.000% of   1)
+  -----------------------------------------------------
+   Valence non-Lewis         0.00000 (  0.000% of   1)
+   Rydberg non-Lewis         0.00000 (  0.000% of   1)
+  ==================      =============================
+   Total non-Lewis           0.00000 (  0.000% of   1)
+ -------------------------------------------------------
+
+
+     (Occupancy)   Bond orbital / Coefficients / Hybrids
+ ------------------ Lewis ------------------------------------------------------
+   1. (1.00000) CR ( 1)Li  1            s(100.00%)
+                                         1.0000  0.0000  0.0000  0.0000  0.0000
+ ---------------- non-Lewis ----------------------------------------------------
+   2. (0.00000) LV ( 1)Li  1            s( 62.19%)p 0.61( 37.81%)
+   3. (0.00000) LV ( 1) H  2            s(100.00%)
+   4. (0.00000) RY ( 1)Li  1            s( 37.81%)p 1.64( 62.19%)
+   5. (0.00000) RY ( 2)Li  1            s(  0.00%)p 1.00(100.00%)
+   6. (0.00000) RY ( 3)Li  1            s(  0.00%)p 1.00(100.00%)
+
+
+ NHO DIRECTIONALITY AND BOND BENDING (deviation from line of nuclear centers at
+                                      the position of maximum hybrid amplitude)
+
+         [Thresholds for printing:  angular deviation  >  1.0 degree]
+                                    p- or d-character  > 25.0%
+                                    orbital occupancy  >  0.10e
+
+                        Line of Centers        Hybrid 1             Hybrid 2
+                        ---------------  -------------------  ------------------
+           NBO            Theta   Phi    Theta   Phi    Dev   Theta   Phi    Dev
+ ===============================================================================
+    None exceeding thresholds
+
+
+ SECOND ORDER PERTURBATION THEORY ANALYSIS OF FOCK MATRIX IN NBO BASIS
+
+     Threshold for printing:   0.25 kcal/mol
+    (Intermolecular threshold: 0.03 kcal/mol)
+                                                          E(2) E(NL)-E(L) F(L,NL)
+      Donor (L) NBO              Acceptor (NL) NBO      kcal/mol   a.u.    a.u.
+ ===============================================================================
+
+ within unit  1
+       None above threshold
+
+ from unit  1 to unit  2
+       None above threshold
+
+ from unit  2 to unit  1
+       None above threshold
+
+ within unit  2
+       None above threshold
+
+
+ NATURAL BOND ORBITALS (Summary):
+
+                                                     Principal Delocalizations
+           NBO                 Occupancy    Energy   (geminal,vicinal,remote)
+ ===============================================================================
+ Molecular unit  1  (Li)
+ ------ Lewis --------------------------------------
+    1. CR ( 1)Li  1             1.00000    -2.72586
+ ------ non-Lewis ----------------------------------
+    2. LV ( 1)Li  1             0.00000    -0.12338
+    4. RY ( 1)Li  1             0.00000     0.13009
+    5. RY ( 2)Li  1             0.00000    -0.09275
+    6. RY ( 3)Li  1             0.00000    -0.09275
+          -------------------------------
+                 Total Lewis    1.00000  ( 99.9997%)
+           Valence non-Lewis    0.00000  (  0.0000%)
+           Rydberg non-Lewis    0.00000  (  0.0000%)
+          -------------------------------
+               Total unit  1    1.00000  (100.0000%)
+              Charge unit  1    0.50000
+
+ Molecular unit  2  (H)
+ ------ Lewis --------------------------------------
+ ------ non-Lewis ----------------------------------
+    3. LV ( 1) H  2             0.00000    -0.06774
+          -------------------------------
+                 Total Lewis    0.00000  (  0.0000%)
+           Valence non-Lewis    0.00000  (  0.0000%)
+           Rydberg non-Lewis    0.00000  (  0.0000%)
+          -------------------------------
+               Total unit  2    0.00000  (100.0000%)
+              Charge unit  2    0.50000
+
+ $CHOOSE
+  ALPHA
+   BOND S 1 2 END
+  END
+  BETA
+  END
+ $END
+
+
+ NATURAL LOCALIZED MOLECULAR ORBITAL (NLMO) ANALYSIS:
+
+ 1 pass over DM reduced the maximum off-diagonal element to 0.22E-13
+
+ Hybridization/Polarization Analysis of NLMOs in NAO Basis, Beta Spin:
+ NLMO / Occupancy / Percent from Parent NBO / Atomic Hybrid Contributions
+ -------------------------------------------------------------------------------
+   1. (1.00000)  99.9997% CR ( 1)Li  1
+                         100.000% Li  1 s(100.00%)p 0.00(  0.00%)
+
+ Individual LMO bond orders greater than 0.002 in magnitude,
+ with the overlap between the hybrids in the NLMO given:
+
+ Atom I / Atom J / NLMO / Bond Order / Hybrid Overlap /
+
+
+ Atom-Atom Net Linear NLMO/NPA Bond Orders:
+
+     Atom    1       2
+     ---- ------  ------
+   1. Li  0.0000  0.0000
+   2.  H  0.0000  0.0000
+
+
+ Linear NLMO/NPA Bond Orders, Totals by Atom:
+
+     Atom    1
+     ---- ------
+   1. Li  0.0000
+   2.  H  0.0000
+
+ Maximum scratch memory used by NBO was 130727 words (1.00 MB)
+Stopping NBO...-------
+TIMINGS
+-------
+
+Total SCF time: 0 days 0 hours 0 min 0 sec 
+
+Total time                  ....       0.235 sec
+Sum of individual times     ....       0.102 sec  ( 43.7%)
+
+Fock matrix formation       ....       0.009 sec  (  3.9%)
+Diagonalization             ....       0.001 sec  (  0.3%)
+Density matrix formation    ....       0.000 sec  (  0.0%)
+Population analysis         ....       0.078 sec  ( 33.2%)
+Initial guess               ....       0.005 sec  (  2.0%)
+Orbital Transformation      ....       0.000 sec  (  0.0%)
+Orbital Orthonormalization  ....       0.000 sec  (  0.0%)
+DIIS solution               ....       0.001 sec  (  0.6%)
+
+Maximum memory used throughout the entire SCF-calculation: 223.5 MB
+
+-------------------------   --------------------
+FINAL SINGLE POINT ENERGY        -7.609539067391
+-------------------------   --------------------
+
+
+                            ***************************************
+                            *     ORCA property calculations      *
+                            ***************************************
+
+                                    ---------------------
+                                    Active property flags
+                                    ---------------------
+   (+) Dipole Moment
+
+
+------------------------------------------------------------------------------
+                       ORCA ELECTRIC PROPERTIES CALCULATION
+------------------------------------------------------------------------------
+
+Dipole Moment Calculation                       ... on
+Quadrupole Moment Calculation                   ... off
+Polarizability Calculation                      ... off
+GBWName                                         ... lih-hf-sto3g.gbw
+Electron density                                ... lih-hf-sto3g.scfp
+The origin for moment calculation is the CENTER OF MASS  = ( 1.803208, -0.135801  0.026629)
+
+-------------
+DIPOLE MOMENT
+-------------
+                                X             Y             Z
+Electronic contribution:      1.64027       0.00000       0.00000
+Nuclear contribution   :     -1.42473       0.00000       0.00000
+                        -----------------------------------------
+Total Dipole Moment    :      0.21554       0.00000       0.00000
+                        -----------------------------------------
+Magnitude (a.u.)       :      0.21554
+Magnitude (Debye)      :      0.54786
+
+
+
+--------------------
+Rotational spectrum 
+--------------------
+ 
+Rotational constants in cm-1:     0.000000     8.181708     8.181708 
+Rotational constants in MHz :     0.000000 245281.426224 245281.426224 
+
+ Dipole components along the rotational axes: 
+x,y,z [a.u.] :     0.215542     0.000000     0.000000 
+x,y,z [Debye]:     0.547863     0.000000     0.000000 
+
+ 
+
+Timings for individual modules:
+
+Sum of individual times         ...        0.411 sec (=   0.007 min)
+GTO integral calculation        ...        0.129 sec (=   0.002 min)  31.4 %
+SCF iterations                  ...        0.282 sec (=   0.005 min)  68.6 %
+                             ****ORCA TERMINATED NORMALLY****
+TOTAL RUN TIME: 0 days 0 hours 0 minutes 0 seconds 497 msec

@@ -1,0 +1,26 @@
+%pal nprocs 1 end
+%maxcore 3000
+! HF STO-3G nbo printbasis
+! verytightscf
+# B3LYP is here the method (DFT functional), def2-SVP the basis set and Opt is the jobtype (geometry optimization). 
+# Order of the keywords is not important.
+
+
+%nbo
+NBOKEYLIST = "$NBO bndidx NPA NLMO  AONLMO=W  ARCHIVE NLMO file=lih-hf-sto3g $END"
+end
+
+#%output
+#PrintLevel Normal
+#Print[ P_NPA ] 1
+#Print[ P_NBO ] 1 # turn print off
+ # turn print on
+# some flags are more sophisticated
+#end
+
+* xyz 1 2
+ Li                 1.14823317   -0.07186255    0.01409127
+ H                 -0.38176683   -0.07186255    0.01409127
+*
+
+

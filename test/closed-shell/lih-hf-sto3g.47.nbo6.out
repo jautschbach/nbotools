@@ -1,0 +1,204 @@
+
+ *********************************** NBO 6.0 ***********************************
+             N A T U R A L   A T O M I C   O R B I T A L   A N D
+          N A T U R A L   B O N D   O R B I T A L   A N A L Y S I S
+ *************************** Erik Van Lenthe (100424) **************************
+  (c) Copyright 1996-2017 Board of Regents of the University of Wisconsin System
+      on behalf of the Theoretical Chemistry Institute.  All rights reserved.
+
+          Cite this program as:
+
+          NBO 6.0.  E. D. Glendening, J. K. Badenhoop, A. E. Reed,
+          J. E. Carpenter, J. A. Bohmann, C. M. Morales, C. R. Landis,
+          and F. Weinhold (Theoretical Chemistry Institute, University
+          of Wisconsin, Madison, WI, 2013); http://nbo6.chem.wisc.edu/
+
+       /NAONHO / : Write the NAO to NHO transformation to lfn49
+       /NHONBO / : Write the NHO to NBO transformation to lfn49
+       /NBONLMO/ : Write the NBO to NLMO transformation to lfn49
+       /NLMOMO / : Write the NLMO to MO transformation to lfn49
+       /FAO    / : Write the AO Fock matrix to lfn49
+       /SAO    / : Print the AO overlap matrix
+       /SPNAO  / : Print the PNAO overlap matrix
+       /SPNBO  / : Write the PNBO overlap matrix to lfn49
+       /PLOT   / : Write information for the orbital plotter
+       /FILE   / : Set to lih-hf-sto3g
+
+ Filename set to lih-hf-sto3g
+
+ Job title:  ORCA Job: lih-hf-sto3g
+
+
+ AO overlap matrix:
+
+          AO         1       2       3       4       5       6
+      ---------- ------- ------- ------- ------- ------- -------
+   1. Li 1 (s)    1.0000  0.2411  0.0000  0.0000  0.0000  0.0772
+   2. Li 1 (s)    0.2411  1.0000  0.0000  0.0000 -0.0000  0.4128
+   3. Li 1 (pz)   0.0000  0.0000  1.0000  0.0000  0.0000  0.0000
+   4. Li 1 (px)   0.0000  0.0000  0.0000  1.0000  0.0000 -0.5253
+   5. Li 1 (py)   0.0000 -0.0000  0.0000  0.0000  1.0000 -0.0000
+   6.  H 2 (s)    0.0772  0.4128  0.0000 -0.5253 -0.0000  1.0000
+
+
+ NATURAL POPULATIONS:  Natural atomic orbital occupancies
+
+  NAO Atom No lang   Type(AO)    Occupancy      Energy
+ -------------------------------------------------------
+   1   Li  1  s      Cor( 1s)     1.99993      -2.34722
+   2   Li  1  s      Val( 2s)     0.39561       0.06532
+   3   Li  1  px     Ryd( 2p)     0.16209       0.37487
+   4   Li  1  py     Ryd( 2p)     0.00000       0.16384
+   5   Li  1  pz     Ryd( 2p)     0.00000       0.16384
+
+   6    H  2  s      Val( 1s)     1.44237      -0.08599
+
+
+ Summary of Natural Population Analysis:
+
+                                     Natural Population
+             Natural    ---------------------------------------------
+  Atom No    Charge        Core      Valence    Rydberg      Total
+ --------------------------------------------------------------------
+   Li  1    0.44237      1.99993     0.39561    0.16209     2.55763
+    H  2   -0.44237      0.00000     1.44237    0.00000     1.44237
+ ====================================================================
+ * Total * -0.00000      1.99993     1.83797    0.16209     4.00000
+
+                                 Natural Population
+ ---------------------------------------------------------
+   Core                       1.99993 ( 99.9966% of    2)
+   Valence                    1.83797 ( 91.8987% of    2)
+   Natural Minimal Basis      3.83791 ( 95.9476% of    4)
+   Natural Rydberg Basis      0.16209 (  4.0524% of    4)
+ ---------------------------------------------------------
+
+    Atom No         Natural Electron Configuration
+ ----------------------------------------------------------------------------
+     Li  1      [core]2s( 0.40)2p( 0.16)
+      H  2            1s( 1.44)
+
+
+ PNAO overlap matrix:
+
+          NAO        1       2       3       4       5       6
+      ---------- ------- ------- ------- ------- ------- -------
+   1. Li 1( 1s )  1.0000 -0.0000  0.0000  0.0000  0.0000  0.0911
+   2. Li 1( 2s ) -0.0000  1.0000  0.0000 -0.0000  0.0000  0.4033
+   3. Li 1( 2px)  0.0000  0.0000  1.0000  0.0000  0.0000 -0.5253
+   4. Li 1( 2py)  0.0000 -0.0000  0.0000  1.0000  0.0000 -0.0000
+   5. Li 1( 2pz)  0.0000  0.0000  0.0000  0.0000  1.0000  0.0000
+   6.  H 2( 1s )  0.0911  0.4033 -0.5253 -0.0000  0.0000  1.0000
+
+
+ NATURAL BOND ORBITAL ANALYSIS:
+
+                            Occupancies       Lewis Structure    Low   High
+         Max    Occ     -------------------  -----------------   occ   occ
+  Cycle  Ctr   Thresh    Lewis   non-Lewis     CR  BD  nC  LP    (L)   (NL)
+ ============================================================================
+    1     2     1.90     3.99993   0.00007      1   1   0   0     0      0
+ ----------------------------------------------------------------------------
+
+ Structure accepted: No low occupancy Lewis orbitals
+
+ -------------------------------------------------------
+   Core                      1.99993 ( 99.997% of   2)
+   Valence Lewis             2.00000 (100.000% of   2)
+  ==================      =============================
+   Total Lewis               3.99993 ( 99.998% of   4)
+  -----------------------------------------------------
+   Valence non-Lewis         0.00003 (  0.001% of   4)
+   Rydberg non-Lewis         0.00004 (  0.001% of   4)
+  ==================      =============================
+   Total non-Lewis           0.00007 (  0.002% of   4)
+ -------------------------------------------------------
+
+
+     (Occupancy)   Bond orbital / Coefficients / Hybrids
+ ------------------ Lewis ------------------------------------------------------
+   1. (1.99993) CR ( 1)Li  1            s(100.00%)
+                                         1.0000  0.0000  0.0000  0.0000  0.0000
+   2. (2.00000) BD ( 1)Li  1- H  2
+               ( 27.88%)   0.5280*Li  1 s( 70.94%)p 0.41( 29.06%)
+                                         0.0000  0.8423 -0.5390 -0.0000 -0.0000
+               ( 72.12%)   0.8492* H  2 s(100.00%)
+                                         1.0000
+ ---------------- non-Lewis ----------------------------------------------------
+   3. (0.00003) BD*( 1)Li  1- H  2
+               ( 72.12%)   0.8492*Li  1 s( 70.94%)p 0.41( 29.06%)
+               ( 27.88%)  -0.5280* H  2 s(100.00%)
+   4. (0.00004) RY ( 1)Li  1            s( 29.06%)p 2.44( 70.94%)
+   5. (0.00000) RY ( 2)Li  1            s(  0.00%)p 1.00(100.00%)
+   6. (0.00000) RY ( 3)Li  1            s(  0.00%)p 1.00(100.00%)
+
+
+ NHO DIRECTIONALITY AND BOND BENDING (deviation from line of nuclear centers at
+                                      the position of maximum hybrid amplitude)
+
+         [Thresholds for printing:  angular deviation  >  1.0 degree]
+                                    p- or d-character  > 25.0%
+                                    orbital occupancy  >  0.10e
+
+                        Line of Centers        Hybrid 1             Hybrid 2
+                        ---------------  -------------------  ------------------
+           NBO            Theta   Phi    Theta   Phi    Dev   Theta   Phi    Dev
+ ===============================================================================
+ Failed to locate density maximum for hybrid 2 on center 1
+
+
+ SECOND ORDER PERTURBATION THEORY ANALYSIS OF FOCK MATRIX IN NBO BASIS
+
+     Threshold for printing:   0.50 kcal/mol
+                                                          E(2) E(NL)-E(L) F(L,NL)
+      Donor (L) NBO              Acceptor (NL) NBO      kcal/mol   a.u.    a.u.
+ ===============================================================================
+
+ within unit  1
+       None above threshold
+
+
+ NATURAL BOND ORBITALS (Summary):
+
+                                                     Principal Delocalizations
+           NBO                 Occupancy    Energy   (geminal,vicinal,remote)
+ ===============================================================================
+ Molecular unit  1  (HLi)
+ ------ Lewis --------------------------------------
+    1. CR ( 1)Li  1             1.99993    -2.34722
+    2. BD ( 1)Li  1- H  2       2.00000    -0.29113
+ ------ non-Lewis ----------------------------------
+    3. BD*( 1)Li  1- H  2       0.00003     0.44459
+    4. RY ( 1)Li  1             0.00004     0.20074
+    5. RY ( 2)Li  1             0.00000     0.16384
+    6. RY ( 3)Li  1             0.00000     0.16384
+          -------------------------------
+                 Total Lewis    3.99993  ( 99.9983%)
+           Valence non-Lewis    0.00003  (  0.0008%)
+           Rydberg non-Lewis    0.00004  (  0.0009%)
+          -------------------------------
+               Total unit  1    4.00000  (100.0000%)
+              Charge unit  1    0.00000
+
+ $CHOOSE
+   BOND S 1 2 END
+ $END
+
+
+ NATURAL LOCALIZED MOLECULAR ORBITAL (NLMO) ANALYSIS:
+
+ 1 pass over DM reduced the maximum off-diagonal element to 0.34E-12
+
+ Hybridization/Polarization Analysis of NLMOs in NAO Basis:
+ NLMO / Occupancy / Percent from Parent NBO / Atomic Hybrid Contributions
+ -------------------------------------------------------------------------------
+   1. (2.00000)  99.9966% CR ( 1)Li  1
+                         100.000% Li  1 s(100.00%)p 0.00(  0.00%)
+   2. (2.00000) 100.0000% BD ( 1)Li  1- H  2
+                          27.882% Li  1 s( 70.94%)p 0.41( 29.06%)
+                          72.118%  H  2 s(100.00%)
+
+ NORMAL TERMINATION of nbo program
+
+ Maximum scratch memory used by NBO was 130817 words (1.00 MB)
+ Maximum scratch memory used by GENNBO was 138 words (0.00 MB)

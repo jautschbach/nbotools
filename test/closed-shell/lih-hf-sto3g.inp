@@ -1,0 +1,15 @@
+%pal nprocs 1 end
+%maxcore 3000
+! HF STO-3G nbo printbasis
+! verytightscf
+
+
+%nbo
+NBOKEYLIST = "$NBO bndidx NPA NLMO  AONLMO=W  ARCHIVE NLMO file=lih-hf-sto3g $END"
+end
+
+* xyz 0 1
+Li                 0.92503987    0.19936204    0.00000000
+H                 -0.60496013    0.19936204    0.00000000
+*
+
