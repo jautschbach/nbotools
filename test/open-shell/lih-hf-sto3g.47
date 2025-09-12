@@ -1,5 +1,5 @@
  $GENNBO  NATOMS=2  NBAS=6  OPEN  UPPER  BODM  FORMAT=PRECISE  $END
-$NBO plot SAO  SPNAO FAO=w SPNBO=W  NAONHO=W NHONBO=W NBONLMO=W NLMOMO=W FILE=lih-hf-sto3g  $END
+$NBO plot  FILE=lih-hf-sto3g  $END
  $COORD
  ORCA Job: lih-hf-sto3g
      3    3       1.148233      -0.071863       0.014091
