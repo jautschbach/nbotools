@@ -12,7 +12,7 @@ class MenuOption(Enum):
     EXIT = 0
     TRANSFORMATION_ENERGIES = auto()
     ORBITAL_TRANSFORMATION = auto()
-    OPERATION_MATRICES = auto()
+    OPERATOR_MATRICES = auto()
     PNAO_ORBITALS = auto()
     PNAO_ENERGIES = auto()
     # GEE_SOLVER = auto()
@@ -36,16 +36,16 @@ class NboToolsMenu:
         """Display the menu options with clear, descriptive text."""
         print("\n===== NBOTOOLS Menu =====")
         menu_descriptions = {
-            MenuOption.TRANSFORMATION_ENERGIES: "Get transformation energies (e.g., AOMO energies)",
-            MenuOption.ORBITAL_TRANSFORMATION: "Get orbital transformation (e.g., AOMO)",
-            MenuOption.OPERATION_MATRICES: "Get operation matrices (e.g., Fock matrix in AO basis)",
-            MenuOption.PNAO_ORBITALS: "Orbitals in PNAO basis (e.g., PNAOMO)",
-            MenuOption.PNAO_ENERGIES: "Energies in PNAO basis (e.g., PNAOMO energy)",
+            MenuOption.TRANSFORMATION_ENERGIES: "Computes energies such as AOMO energies.",
+            MenuOption.ORBITAL_TRANSFORMATION: "Performs transformations like AOMO",
+            MenuOption.OPERATOR_MATRICES: "Retrieves matrices, such as the Fock matrix in the AO basis (if available)",
+            MenuOption.PNAO_ORBITALS: "Computes orbitals in the PNAO basis (e.g., PNAOMO).",
+            MenuOption.PNAO_ENERGIES: "Calculates orbital energies in the PNAO basis (e.g., PNAOMO energy)",
             # MenuOption.GEE_SOLVER: "Generalized Eigenvalue Equation Solver use option 9",
-            MenuOption.ORBITAL_LOCALIZATION: "Localize Orbitals",
-            MenuOption.BOND_ORDER_ANALYSIS: "Perform Bond Order Analysis",
-            MenuOption.RHE_SOLVER: "Generalized Eigenvalue Equation Solver",
-            MenuOption.EXIT: "Exit the program"
+            MenuOption.ORBITAL_LOCALIZATION: "Performs Pipek-Mezey orbital localization",
+            MenuOption.BOND_ORDER_ANALYSIS: "Bond order analysis based on NBO data",
+            MenuOption.RHE_SOLVER: "Solves generalized eigenvalue equation",
+            MenuOption.EXIT: "Terminates the program"
         }
         
         for option, description in menu_descriptions.items():
@@ -92,7 +92,7 @@ def main():
     actions = {
         MenuOption.TRANSFORMATION_ENERGIES: lambda: vi_save_mat_from_dict(aoX_energies_dict),
         MenuOption.ORBITAL_TRANSFORMATION: lambda: vi_save_mat_from_dict(aoX_trans),
-        MenuOption.OPERATION_MATRICES: lambda: vi_save_mat_from_dict(opera_matrix),
+        MenuOption.OPERATOR_MATRICES: lambda: vi_save_mat_from_dict(opera_matrix),
         MenuOption.PNAO_ORBITALS: lambda: vi_save_mat_from_dict(pnaoX_trans),
         MenuOption.PNAO_ENERGIES: lambda: vi_save_mat_from_dict(pnaoX_energies_dict),
         # MenuOption.GEE_SOLVER: solve_gee,
