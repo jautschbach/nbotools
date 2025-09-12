@@ -37,7 +37,7 @@ class NboToolsMenu:
         print("\n===== NBOTOOLS Menu =====")
         menu_descriptions = {
             MenuOption.TRANSFORMATION_ENERGIES: "Computes energies such as AOMO energies.",
-            MenuOption.ORBITAL_TRANSFORMATION: " Performs transformations like AOMO",
+            MenuOption.ORBITAL_TRANSFORMATION: "Performs transformations like AOMO",
             MenuOption.OPERATOR_MATRICES: "Retrieves matrices, such as the Fock matrix in the AO basis (if available)",
             MenuOption.PNAO_ORBITALS: "Computes orbitals in the PNAO basis (e.g., PNAOMO).",
             MenuOption.PNAO_ENERGIES: "Calculates orbital energies in the PNAO basis (e.g., PNAOMO energy)",
