@@ -3,6 +3,7 @@ import re
 import time
 import extract_nbo_files
 from basis_info import pre_orb_from_orb
+import pandas as pd
 
 np.set_printoptions(suppress=True, precision=8, floatmode='fixed')
 
@@ -14,30 +15,25 @@ matrix_keys = matrix_dict.keys()
 # print(matrix_keys)
 
 
-# def is_unit_matrix(matrix, tolerance=1e-6):
-    # return np.allclose(matrix, np.eye(matrix.shape[0]), atol=tolerance)
-
-
-# def is_unit_matrix(matrix, tolerance=1e-7):
-#     # Check if the matrix is square
-#     size = len(matrix)
-#     if any(len(row) != size for row in matrix):
-#         return False
-
-#     # Check unit matrix properties with tolerance
-#     for i in range(size):
-#         for j in range(size):
-#             value = matrix[i][j]
-#             if i == j:
-#                 # Check diagonal elements are close to 1
-#                 if abs(value - 1) > tolerance:
-#                     return False
-#             else:
-#                 # Check off-diagonal elements are close to 0
-#                 if abs(value) > tolerance:
-#                     return False
-                    
-#     return True
+pnaofn = filename +".32a"
+def save_modpnao(modified_pnao):
+    with open(pnaofn, 'w') as file:
+        file.write(f"""NAO2PNAO file: {pnaofn}
+Orbitals in AO Basis
+-------------------------------------------------------------------------------
+""")   
+   
+       
+        for col in modified_pnao.columns:
+            column_data = modified_pnao[col].values.tolist()
+            for i, value in enumerate(column_data):
+                file.write(str("{:.13E}".format(value)))
+                if (i + 1) % 5 == 0:
+                    file.write('\n')
+                else:
+                    file.write(' ')
+            file.write('\n')
+    print( f"Modified pNAOs created and saved in {pnaofn}...\n")
 
 def is_unit_matrix(matrix, tolerance=1e-7):
     # Check if the matrix is square
@@ -127,6 +123,7 @@ def update_aopnaos(matrix_dict):
         if AOPNAO is not None:
             matrix_dict["AOPNAOs"] = AOPNAO
             print("AOPNAOs recalculated and updated in matrix_dict.")
+            save_modpnao(pd.DataFrame(AOPNAO))
     else:
         print("Using NBO generated AOPNAOs.")
     
@@ -385,6 +382,7 @@ def get_bf_low_high(fn, NBAS):
 ao_basis, ao_basis_list_dict = get_bf_low_high(filename + '.46', NBAS)
 # print(ao_basis)
 # print(ao_basis_list_dict)
+
 
 
 
