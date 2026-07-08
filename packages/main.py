@@ -19,6 +19,7 @@ class MenuOption(Enum):
     ORBITAL_LOCALIZATION = auto()
     BOND_ORDER_ANALYSIS = auto()
     RHE_SOLVER = auto()
+    NLMO_PART = auto()
 
 class NboToolsMenu:
     """A comprehensive menu-driven quantum chemistry analysis tool."""
@@ -45,6 +46,7 @@ class NboToolsMenu:
             MenuOption.ORBITAL_LOCALIZATION: "Performs Pipek-Mezey orbital localization",
             MenuOption.BOND_ORDER_ANALYSIS: "Bond order analysis based on NBO data",
             MenuOption.RHE_SOLVER: "Solves generalized eigenvalue equation",
+            MenuOption.NLMO_PART: "Get NLMO partition",
             MenuOption.EXIT: "Terminates the program"
         }
         
@@ -84,6 +86,7 @@ def main():
         pnaoX_trans, pnaoX_energies_dict
     )
     # from program_solver import solve_gee
+    from nlmo_partition import part_run
     from pm_localization import pm_run
     from bond_indices import bnd_run
     from val_core_ortho import solve_rhe
@@ -98,7 +101,8 @@ def main():
         # MenuOption.GEE_SOLVER: solve_gee,
         MenuOption.ORBITAL_LOCALIZATION: pm_run,
         MenuOption.BOND_ORDER_ANALYSIS: bnd_run,
-        MenuOption.RHE_SOLVER: solve_rhe
+        MenuOption.RHE_SOLVER: solve_rhe,
+        MenuOption.NLMO_PART: part_run
     }
 
     # Create and run the menu

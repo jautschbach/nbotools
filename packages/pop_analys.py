@@ -1,9 +1,8 @@
-
-     
 import numpy as np
 import pandas as pd
 from sep_mat import is_open
 from sep_mat import aoX_trans
+from collections import defaultdict
 
 if is_open:
     AONAO = pd.DataFrame(aoX_trans["AONAOs_ALPHA"]).values
@@ -78,8 +77,13 @@ def population_analy(c, s, basis_info, fock, NAO_mat=False):
     pop_array = [0] * pop_size  # Create an empty list with size 10
     
     orb_energ = np.diag(c.T @ fock @ c)
+    
+    num_occ_orbs = c.shape[1]
+    
+    occupations = [1 if is_open else 2 for _ in range(num_occ_orbs)]
 
     sc = s @ c
+    atom_total_contrib = defaultdict(float) 
     print("Orbital  | Energy/Ha   | Atom: Percent contribution  ")
     print("---------+-------------+-----------------------------")   
     
@@ -112,6 +116,7 @@ def population_analy(c, s, basis_info, fock, NAO_mat=False):
        
         eval_array = orb_energ
         eval_energy = eval_array[s - 1]
+        eval_occ = occupations[s - 1]
         
         # Create a list of tuples and sort by the first element (the identifier)
         pop_dist = [(list_array[a], pop_array[a]) for a in range(1, nlist + 1)]
@@ -138,3 +143,24 @@ def population_analy(c, s, basis_info, fock, NAO_mat=False):
         
         electron_str = ", ".join(f"{a}: {perc_dist:.3f}%" for a, count, perc_dist in new_electron_dist if perc_dist > 0.01)
         print(f"{s:^8} | {eval_energy:^11.7f} | {electron_str}")
+        
+        
+        # Accumulate weighted contributions (percent * occupation)
+        for a, _, perc_dist in new_electron_dist:
+            atom_total_contrib[a] += (perc_dist * eval_occ) / 100.0
+        
+    
+    
+
+    # After all orbitals, print total contribution per atom
+    print("\nTotal weighted contribution per atom ( from all LMOs):")
+    for a in range(1, natom + 1):
+        total_perc = atom_total_contrib.get(a, 0.0)
+        print(f"Atom {a}: {total_perc:.3f}")
+        
+    total_electrons = sum(atom_total_contrib.values())
+    print(f"\nTotal electrons from population analysis: {total_electrons:.6f}")
+    
+    max_atom = max(atom_total_contrib, key=atom_total_contrib.get)
+    max_contrib = atom_total_contrib[ max_atom ]
+    print(f"\nAtom with highest contribution: {max_atom} -> {max_contrib:.3f}")
