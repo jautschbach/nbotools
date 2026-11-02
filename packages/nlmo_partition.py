@@ -6,7 +6,11 @@ from sep_mat import is_open, aoX_trans,  opera_matrix, filename, ao_basis_list_d
 import re
 import builtins
 import sys
+<<<<<<< HEAD
 from icecream import ic
+=======
+#from icecream import ic
+>>>>>>> 03b3a81 (Citation and menu list updated)
 
 
 

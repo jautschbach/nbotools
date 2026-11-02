@@ -6,7 +6,7 @@ Author: Augustine Obeng, University at Buffalo, SUNY, J. Autschbach research gro
 
 (The parse-namelists code, included in the repository, was written by Jochen Autschbach, University at Buffalo, SUNY)
 
-Literature: https://doi.org/10.26434/chemrxiv-2025-csjxr-v2
+Literature: A. Sen, A. Obeng, K. Stanistreet-Welsh, J. Autschbach, Inorg. Chem. 2025, 64, 23787–23803, https://doi.org/10.1021/acs.inorgchem.5c04679 (preprint: https://doi.org/10.26434/chemrxiv-2025-csjxr-v2)
 
 
 ## Overview
@@ -34,6 +34,7 @@ The script provides the following functionality via an interactive menu:
 * `Localize Orbitals`: Performs Pipek-Mezey orbital localization.
 * `Bond Order Analysis`: Bond order analysis based on NBO data.
 * `Generalized Eigenvalue Equation Solver`: Solves generalized eigenvalue equations.
+* `NLMO partitioning`: Partitions NLMOs into Metal-Ligand-donation and vice-versa.
 0. `Exit`: Terminates the program.
 
 *AOPNAO Matrix Options:* When processing the NBO files, NBOTools offers two options for handling the AOPNAO matrix:
