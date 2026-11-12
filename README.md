@@ -7,7 +7,6 @@ Author: Augustine Obeng, University at Buffalo, SUNY, J. Autschbach research gro
 (The parse-namelists code, included in the repository, was written by Jochen Autschbach, University at Buffalo, SUNY)
 
 Literature: A. Sen, A. Obeng, K. Stanistreet-Welsh, J. Autschbach, Inorg. Chem. 2025, 64, 23787–23803, https://doi.org/10.1021/acs.inorgchem.5c04679 (preprint: https://doi.org/10.26434/chemrxiv-2025-csjxr-v2)
-Literature: https://doi.org/10.26434/chemrxiv-2025-csjxr-v2
 
 
 ## Overview
